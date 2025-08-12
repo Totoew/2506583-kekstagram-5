@@ -1,10 +1,15 @@
-import { generatePhoto } from './generate-photo.js';
-import { renderPhotos } from './draw.js';
+import { showFilteredPictures } from './filter.js';
+import { getData } from './api.js';
+import { showAlert } from './util.js';
+import './form.js';
 
-const posts = [];
-for (let i = 1; i <= 25; i++) {
-  const currentPhoto = generatePhoto(i);
-  posts.push(currentPhoto);
-}
+const fetchPictures = async () => {
+  try {
+    showFilteredPictures(await getData());
+  } catch (error){
+    showAlert(error);
+  }
+};
 
-renderPhotos(posts);
+fetchPictures();
+
